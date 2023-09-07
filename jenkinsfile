@@ -1,53 +1,53 @@
-
-            pipeline {
+pipeline {
     agent any
     
     environment {
-        DIRECTORY_PATH = "path/to/code"
-        TESTING_ENVIRONMENT = "testing_my_environment"
-        PRODUCTION_ENVIRONMENT = "website_production_aman"
+        CODE_DIRECTORY = "/direct/codefolder/access/"
+        TESTING_ENV = "testing_my_environment"
+        PROD_ENV = "Website_AmanDas-prod"
     }
     
     stages {
-        stage('Build') {
+        stage('Building') {
             steps {
-                echo "Fetching source code from: ${env.DIRECTORY_PATH}"
-                echo "Compiling the code and generating artifacts"
+                echo "Fetching source code from: ${env.CODE_DIRECTORY}"
+                echo "Compiling the code and creating artifacts"
             }
         }
         
-        stage('Test') {
+        stage('Automated Testing') {
             steps {
-                echo "Running unit tests"
+                echo "Executing automated unit tests"
                 echo "Running integration tests"
             }
         }
         
-        stage('Code Quality Check') {
+        stage('Code Analysis and Quality Check') {
             steps {
-                echo "Checking the quality of the code"
+                echo "Performing code quality analysis"
             }
         }
         
-        stage('Deploy') {
+        stage('Deploy to Test') {
             steps {
-                echo "Deploying the application to ${env.TESTING_ENVIRONMENT}"
+                echo "Deploying the application to ${env.TESTING_ENV}"
             }
         }
         
-        stage('Approval') {
+        stage('Manual Approval') {
             steps {
                 echo "Waiting for manual approval..."
-                sleep(time: 10, unit: 'SECONDS')
+                sleep(time: 15, unit: 'SECONDS')
             }
         }
         
-        stage('Deploy to Production') {
+        stage('Deploy to Production Env') {
             steps {
-                echo "Deploying the code to ${env.PRODUCTION_ENVIRONMENT}"
+                echo "Deploying the code to ${env.PROD_ENV}"
             }
         }
     }
+    
     
     post {
         success {
